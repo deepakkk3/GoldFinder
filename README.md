@@ -1,7 +1,12 @@
 ### GoldFinder: Comprehensive Automated Recon and Vulnerability Assessment Tool
 
-GoldFinder is a powerful Bash script designed to automate and streamline the process of reconnaissance and vulnerability assessment. By leveraging a suite of integrated tools, GoldFinder filters and organizes results to help you efficiently identify critical vulnerabilities in your targets.
 
+GoldFinder is an advanced Bash script that automates subdomain enumeration, URL crawling, and vulnerability testing. It integrates essential tools like `subfinder`, `waybackurls`, `sqlmap`, `nuclei`, and more. Results are systematically organized for efficient analysis.
+
+**Usage:**
+- `./goldfinder.sh -d [domain]` for domain-based scans
+- `./goldfinder.sh -t [target file]` for file-based targets
+  
 **Key Features:**
 
 1. **Subdomain Enumeration:**
@@ -40,8 +45,7 @@ GoldFinder is a powerful Bash script designed to automate and streamline the pro
 **About:**
 GoldFinder was developed two years ago and has been an invaluable tool in my bug bounty efforts. I am now sharing it with the community to assist newcomers and experienced researchers alike in their security assessments.
 
-For additional details and to download GoldFinder, please visit [repository/link].
-
+usuage
 ---
 
-Feel free to adjust the link and any other specific details as needed.
+Feel free to connect
