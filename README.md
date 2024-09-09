@@ -1,7 +1,61 @@
 ### GoldFinder: Comprehensive Automated Recon and Vulnerability Assessment Tool
 
-
 GoldFinder is an advanced Bash script that automates subdomain enumeration, URL crawling, and vulnerability testing. It integrates essential tools like `subfinder`, `waybackurls`, `sqlmap`, `nuclei`, and more. Results are systematically organized for efficient analysis. It was developed two years ago and has been an invaluable tool in my bug bounty efforts. I am now sharing it with the community to assist newcomers and experienced researchers alike in their security assessments.
+
+
+**How To Install**
+
+  Subfinder      ``` apt install subfinder```  
+  
+  Qsreplace    ``` go install github.com/tomnomnom/qsreplace@latest ``` 
+    
+  Freq         ``` go get -u github.com/takshal/freq ``` 
+  
+  Tee          ``` apt-get install coreutils ``` 
+   
+  Waybackurls  ``` go install github.com/tomnomnom/waybackurls@latest ``` 
+   
+  Gau          ``` go install github.com/lc/gau/v2/cmd/gau@latest ``` 
+   
+  SQLmap       ``` apt install sqlmap ``` 
+   
+  Nuclei       ``` apt install nuclei ``` 
+  
+  Gauplus      ``` go install github.com/bp0lr/gauplus@latest ``` 
+  
+  Figlet       ``` apt install figlet ``` 
+   
+  Httpx        ``` go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest ``` 
+ 
+  Sub404        ``` https://github.com/r3curs1v3-pr0xy/sub404``` 
+  
+  Subzy        ``` go install -v github.com/PentestPad/subzy@latest ``` 
+  
+  GF           ``` go get -u github.com/tomnomnom/gf ``` 
+  
+  Uro          ``` pip3 install uro ``` 
+
+
+For detailed installation instructions and tool setup, please refer to each tool’s respective documentation.
+---
+
+**What are the Dependencies?**
+
+- [Subfinder](https://github.com/projectdiscovery/subfinder)
+- [Qsreplace](https://github.com/projectdiscovery/qsreplace)
+- [Freq](https://github.com/freq/freq)
+- [Tee](https://man7.org/linux/man-pages/man1/tee.1.html)
+- [Waybackurls](https://github.com/tomnomnom/waybackurls)
+- [Gau](https://github.com/lc/gau)
+- [SQLmap](https://github.com/sqlmapproject/sqlmap)
+- [Nuclei](https://github.com/projectdiscovery/nuclei)
+- [Gauplus](https://github.com/lc/gauplus)
+- [Figlet](http://www.figlet.org/)
+- [Httpx](https://github.com/projectdiscovery/httpx)
+- [Uro](https://github.com/robertdavidgraham/uro)
+- [Subzy](https://github.com/subzy/subzy)
+- [Sub404](https://github.com/sub404/sub404)
+- [GF](https://github.com/tomnomnom/gf)
 
 
 **Usage:**
@@ -49,27 +103,6 @@ GoldFinder is an advanced Bash script that automates subdomain enumeration, URL 
 2. Allow the script to run for approximately one hour (processing time may vary based on the target size).
 3. Review the organized results to identify and address vulnerabilities.
 
-Required Tools:
-
-    Subfinder   :- https://github.com/projectdiscovery/subfinder
-    Qsreplace   :- https://github.com/tomnomnom/qsreplace
-    Freq        :-    https://github.com/takshal/freq
-    Tee         :- https://ioflood.com/blog/install-tee-command-linux/
-    Waybackurls :- https://github.com/tomnomnom/waybackurls
-    Gau         :- https://github.com/lc/gau
-    SQLmap      :- https://github.com/sqlmapproject/sqlmap
-    Nuclei      :- https://github.com/projectdiscovery/nuclei
-    Gauplus     :- https://github.com/bp0lr/gauplus
-    Figlet      :- https://gist.github.com/kenny-kvibe/b1b7c4948c7406309eb66da3ed2a8144
-    Httpx       :- https://github.com/projectdiscovery/httpx
-    Uro         :- https://github.com/s0md3v/uro
-    Subzy       :- https://github.com/PentestPad/subzy
-    Sub404      :- https://github.com/r3curs1v3-pr0xy/sub404
-    GF          :- https://github.com/tomnomnom/gf
-
-
-For detailed installation instructions and tool setup, please refer to each tool’s respective documentation.
----
 
 Feel free to connect on X (twitter) 
     :-https://x.com/s4msec
