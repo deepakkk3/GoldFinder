@@ -2,6 +2,23 @@
 
 GoldFinder is an advanced Bash script that automates  enumeration, URL crawling, and vulnerability testing. It integrates essential tools. It spawns URLS and filters Sensitive Info.Results are systematically organized for efficient analysis. It was developed two years ago and has been an invaluable tool in my bug bounty efforts. I am now sharing it with the community to assist newcomers and experienced researchers alike in their security assessments.
 
+**What are the Dependencies?**
+
+- [Subfinder](https://github.com/projectdiscovery/subfinder)
+- [Qsreplace](https://github.com/projectdiscovery/qsreplace)
+- [Freq](https://github.com/freq/freq)
+- [Tee](https://man7.org/linux/man-pages/man1/tee.1.html)
+- [Waybackurls](https://github.com/tomnomnom/waybackurls)
+- [Gau](https://github.com/lc/gau)
+- [SQLmap](https://github.com/sqlmapproject/sqlmap)
+- [Nuclei](https://github.com/projectdiscovery/nuclei)
+- [Gauplus](https://github.com/lc/gauplus)
+- [Figlet](http://www.figlet.org/)
+- [Httpx](https://github.com/projectdiscovery/httpx)
+- [Uro](https://github.com/robertdavidgraham/uro)
+- [Subzy](https://github.com/subzy/subzy)
+- [Sub404](https://github.com/sub404/sub404)
+- [GF](https://github.com/tomnomnom/gf)
 
 **How To Install**
 
@@ -35,27 +52,14 @@ GoldFinder is an advanced Bash script that automates  enumeration, URL crawling,
   
   Uro          ``` pip3 install uro ``` 
 
+``git clone https://github.com/deepakkk3/GoldFinder.git ``   
+
+``cd GoldFinder``
+
+``chmod +x sam.sh`` 
 
 For detailed installation instructions and tool setup, please refer to each tool’s respective documentation.
 ---
-
-**What are the Dependencies?**
-
-- [Subfinder](https://github.com/projectdiscovery/subfinder)
-- [Qsreplace](https://github.com/projectdiscovery/qsreplace)
-- [Freq](https://github.com/freq/freq)
-- [Tee](https://man7.org/linux/man-pages/man1/tee.1.html)
-- [Waybackurls](https://github.com/tomnomnom/waybackurls)
-- [Gau](https://github.com/lc/gau)
-- [SQLmap](https://github.com/sqlmapproject/sqlmap)
-- [Nuclei](https://github.com/projectdiscovery/nuclei)
-- [Gauplus](https://github.com/lc/gauplus)
-- [Figlet](http://www.figlet.org/)
-- [Httpx](https://github.com/projectdiscovery/httpx)
-- [Uro](https://github.com/robertdavidgraham/uro)
-- [Subzy](https://github.com/subzy/subzy)
-- [Sub404](https://github.com/sub404/sub404)
-- [GF](https://github.com/tomnomnom/gf)
 
 
 **Usage:**
