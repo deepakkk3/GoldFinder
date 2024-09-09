@@ -14,7 +14,7 @@ BOLD='\033[1m'
 
     
 # Display a welcome message
-echo -e "${BLUE}"
+echo -e "${YELLOW}"
 figlet -f slant "GoldFinder s4msec Tool"
 echo -e "${NC}"                       			   "${RED} !!!...)...!!! Hang Tight for better results. Grab a coffee – It'll Take a Bit. Thanks For Your Patience !!!...)...!!!"
 
