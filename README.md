@@ -51,10 +51,10 @@ GoldFinder is an advanced Bash script that automates subdomain enumeration, URL 
 
 Required Tools:
 
-    Subfinder :- https://github.com/projectdiscovery/subfinder
-    Qsreplace :- https://github.com/tomnomnom/qsreplace
-    Freq :- https://github.com/takshal/freq
-    Tee :- https://ioflood.com/blog/install-tee-command-linux/
+    Subfinder   :- https://github.com/projectdiscovery/subfinder
+    Qsreplace   :- https://github.com/tomnomnom/qsreplace
+    Freq        :-    https://github.com/takshal/freq
+    Tee         :- https://ioflood.com/blog/install-tee-command-linux/
     Waybackurls :- https://github.com/tomnomnom/waybackurls
     Gau         :- https://github.com/lc/gau
     SQLmap      :- https://github.com/sqlmapproject/sqlmap
@@ -67,12 +67,9 @@ Required Tools:
     Sub404      :- https://github.com/r3curs1v3-pr0xy/sub404
     GF          :- https://github.com/tomnomnom/gf
 
-Usage:
-
-    ./goldfinder.sh -d [domain] for domain-based scans
-    ./goldfinder.sh -t [target file] for file-based targets
 
 For detailed installation instructions and tool setup, please refer to each tool’s respective documentation.
 ---
 
-Feel free to connect
+Feel free to connect on X (twitter) 
+    :-https://x.com/s4msec
