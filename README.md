@@ -4,8 +4,8 @@
 GoldFinder is an advanced Bash script that automates subdomain enumeration, URL crawling, and vulnerability testing. It integrates essential tools like `subfinder`, `waybackurls`, `sqlmap`, `nuclei`, and more. Results are systematically organized for efficient analysis.
 
 **Usage:**
-- `./goldfinder.sh -d [domain]` for domain-based scans
-- `./goldfinder.sh -t [target file]` for file-based targets
+- `./sam.sh -d [domain]` for domain-based scans
+- `./sam.sh -t [target file]` for file-based targets
   
 **Key Features:**
 
