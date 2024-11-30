@@ -80,17 +80,21 @@ process_domain() {
    
     cat validsub.txt | waybackurls  | httpx -silent  -mc 200  | tee valid_wb.txt | wc -l 
     echo -e "${YELLOW}valid Waybackurls saved to valid_wb.txt" ; wc -l valid_wb.txt
-     echo -e "${RED}=======================================================================XX============================================================================================"
+    echo -e "${RED}=======================================================================XX============================================================================================"
     
+    cat validgau.txt valid_wb.txt | anew allurl.txt  
+    echo -e "${YELLOW}valid Waybackurls & validgau saved to allurl.txt" ; wc -l allurl.txt
+    echo -e "${RED}=======================================================================XX============================================================================================"
+   
     echo -e "${BLUE}Testing Reflected Xss"
-     echo -e "${RED}=======================================================================XX============================================================================================"
-    cat valid_wb.txt | grep "=" | egrep -iv ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|icon|pdf|svg|txt|js)" | uro | qsreplace '"><img src=x onerror=alert(1);>' | freq | tee xss.txt
+    echo -e "${RED}=======================================================================XX============================================================================================"
+    cat allurl.txt  | grep "=" | egrep -iv ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|icon|pdf|svg|txt|js)" | uro | qsreplace '"><img src=x onerror=alert(1);>' | freq | tee xss.txt
     echo -e "${YELLOW}XXS URL saved to xxs.txt" ; wc -l xss.txt
-     echo -e "${RED}=======================================================================XX============================================================================================"
+    echo -e "${RED}=======================================================================XX============================================================================================"
      
     echo -e "${BLUE}Collecting All Javascript Files"    
      echo -e "${RED}=======================================================================XX============================================================================================"
-    cat valid_wb.txt | grep "js" | tee js.txt | wc -l
+    cat allurl.txt  | grep "js" | tee js.txt | wc -l
     echo -e "${YELLOW}Javascript File saved to js.txt" ; wc -l js.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
@@ -98,17 +102,17 @@ process_domain() {
     echo -e "${YELLOW}grep File saved to grep-js" ; wc -l grep-js
      echo -e "${RED}=======================================================================XX============================================================================================"
        
-    cat valid_wb.txt | grep ".xls\|.xlsx\|.sql\|.csv\|.env\|.msql\|.bak\|.bkp\|.bkf\|.old\|.temp\|.db\|.mdb\|.config\|.yaml\|.zip\|.tar\|.git\|.xz\|.asmx\|.vcf\|.pem" | sort | uniq | tee wb_sensitive.txt | wc -l     
+    cat allurl.txt  | grep ".xls\|.xlsx\|.sql\|.csv\|.env\|.msql\|.bak\|.bkp\|.bkf\|.old\|.temp\|.db\|.mdb\|.config\|.yaml\|.zip\|.tar\|.git\|.xz\|.asmx\|.vcf\|.pem" | sort | uniq | tee wb_sensitive.txt | wc -l     
     echo -e "${YELLOW}WB Sensitive files saved wb_sensitive.txt" ; wc -l wb_sensitive.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
      
 #other
     
-    cat valid_wb.txt | grep -i "jira\|jenkins\|grafana\|mailman\|+CSCOE+\|+CSCOT+\|+CSCOCA+\|symfony\|graphql\|debug\|gitlab\|phpmyadmin\|phpMyAdmin" | sort | uniq | tee wb-third-party-assets.txt| wc -l 
+    cat allurl.txt  | grep -i "jira\|jenkins\|grafana\|mailman\|+CSCOE+\|+CSCOT+\|+CSCOCA+\|symfony\|graphql\|debug\|gitlab\|phpmyadmin\|phpMyAdmin" | sort | uniq | tee wb-third-party-assets.txt| wc -l 
     echo -e "${YELLOW}All wb-third-party-assets Files saved to wb-third-party-assets.txt" ; wc -l wb-third-party-assets.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-    cat valid_wb.txt | grep "@" | sort | uniq | tee wb-emails-usersnames.txt | wc -l
+    cat allurl.txt  | grep "@" | sort | uniq | tee wb-emails-usersnames.txt | wc -l
     echo -e "${YELLOW}All wb-emails-usersnames Files saved to wb-emails-usersnames.txt{NC}" ; wc -l wb-emails-usersnames.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
@@ -116,23 +120,23 @@ process_domain() {
     echo -e "${YELLOW}All wb-error Files saved to wb-error.txt" ; wc -l wb-error.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-    cat valid_wb.txt | grep -i "root\| internal\| private\|secret" | sort | uniq | tee other-possible-sensitive-path.txt | wc -l
+    cat allurl.txt  | grep -i "root\| internal\| private\|secret" | sort | uniq | tee other-possible-sensitive-path.txt | wc -l
     echo -e "${YELLOW}ALL other-possible-sensitive-path Files saved to other-possible-sensitive-path.txt" ; wc -l other-possible-sensitive-path.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-    cat valid_wb.txt | grep -i "login\|singup\|admin\|dashboard\|wp-admin\|singin\|adminer\|dana-na\|login/?next/=" | sort | uniq | tee wb-panel.txt | wc -l
+    cat allurl.txt  | grep -i "login\|singup\|admin\|dashboard\|wp-admin\|singin\|adminer\|dana-na\|login/?next/=" | sort | uniq | tee wb-panel.txt | wc -l
     echo -e "${YELLOW}All wb-panel Files saved to wb-panel.txt" ; wc -l wb-panel.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-    cat valid_wb.txt | grep -i robots.txt | sort | uniq | tee only-robots.txt | wc -l
+    cat allurl.txt  | grep -i robots.txt | sort | uniq | tee only-robots.txt | wc -l
     echo -e "${YELLOW}robots.txt Files saved to only-robots.txt" ; wc -l only-robots.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-    cat valid_wb.txt | cut -d'/' -f3 | cut -d':' -f1 | sed 's/^\(\|s\):\/\///g' | tee subdomains.txt | wc -l 
+    cat allurl.txt  | cut -d'/' -f3 | cut -d':' -f1 | sed 's/^\(\|s\):\/\///g' | tee subdomains.txt | wc -l 
     echo -e "${YELLOW}subdomains Files saved to subdomains.txt" ; wc -l subdomains.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-    cat valid_wb.txt | rev | cut -d '/' -f 1 | rev | sed 's/^\(\|s\):\/\///g' | sed '/=\|.js\|.gif\|.html\|.rss\|.cfm\|.htm\|.jpg\|.mp4\|.css\|.jpeg\|.png\|:\|%/d' | tee wordlist.txt | wc -l
+    cat allurl.txt  | rev | cut -d '/' -f 1 | rev | sed 's/^\(\|s\):\/\///g' | sed '/=\|.js\|.gif\|.html\|.rss\|.cfm\|.htm\|.jpg\|.mp4\|.css\|.jpeg\|.png\|:\|%/d' | tee wordlist.txt | wc -l
     echo -e "${YELLOW}wordlist Files saved to wordlist.txt" ; wc -l wordlist.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
     
@@ -140,11 +144,11 @@ process_domain() {
     echo -e "${YELLOW} xlsx Files saved xlsx.txt" ; wc -l xlsx.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-    cat valid_wb.txt | grep '.bak' | tee bak.txt 
+    cat allurl.txt  | grep '.bak' | tee bak.txt 
     echo -e "${YELLOW} bak File saved bak.txt" ; wc -l bak.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
       
-    cat valid_wb.txt | grep '.log'| tee log.txt 
+    cat allurl.txt  | grep '.log'| tee log.txt 
     echo -e "${YELLOW} Log Files saved log.txt" ; wc -l log.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
     
@@ -159,7 +163,7 @@ process_domain() {
     subzy run --targets allsub.txt --hide_fails     
      echo -e "${RED}=======================================================================XX============================================================================================"      
      
-    cat valid_wb.txt | gf sqli| tee sql1.txt
+    cat allurl.txt  | gf sqli| tee sql1.txt
     echo -e "${YELLOW}All sql Saved to sql1.txt" ; wc -l sql1.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
      
@@ -188,7 +192,7 @@ process_domain() {
     
     echo -e "${BLUE}Collecting SSRF Endpoints"
      echo -e "${RED}=======================================================================XX============================================================================================"
-    cat valid_wb.txt | gf ssrf | tee SSRF_endpoint.txt
+    cat allurl.txt  | gf ssrf | tee SSRF_endpoint.txt
     echo -e "${YELLOW}SSRF Result saved to SSRF_endpoint.txt" ; wc -l SSRF_endpoint.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
     
@@ -226,15 +230,19 @@ process_domain_list() {
      echo -e "${YELLOW}valid Waybackurls saved to valid_wb.txt" ; wc -l valid_wb.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
     
+     cat validgau.txt valid_wb.txt | anew allurl.txt  
+     echo -e "${YELLOW}valid Waybackurls & validgau saved to allurl.txt" ; wc -l allurl.txt
+     echo -e "${RED}=======================================================================XX============================================================================================"
+       
      echo -e "${BLUE}Testing Reflected Xss"
      echo -e "${RED}=======================================================================XX============================================================================================"
-     cat valid_wb.txt | grep "=" | egrep -iv ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|icon|pdf|svg|txt|js)" | uro | qsreplace '"><img src=x onerror=alert(1);>' | freq | tee xss.txt
+     cat allurl.txt  | grep "=" | egrep -iv ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|icon|pdf|svg|txt|js)" | uro | qsreplace '"><img src=x onerror=alert(1);>' | freq | tee xss.txt
      echo -e "${YELLOW}XXS URL saved to xxs.txt" ; wc -l xss.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
            
      echo -e "${BLUE}Collecting All Javascript Files"    
      echo -e "${RED}=======================================================================XX============================================================================================"
-     cat valid_wb.txt | grep  "js" | tee js.txt | wc -l
+     cat allurl.txt | grep  "js" | tee js.txt | wc -l
      echo -e "${YELLOW}All Javascript Files saved to js.txt" ; wc -l js.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
      
@@ -242,53 +250,53 @@ grep -r -E "aws_access_key|aws_secret_key|api key|passwd|pwd|heroku|slack|fireba
     echo -e "${YELLOW}grep File saved to grep-js" ; wc -l grep-js
      echo -e "${RED}=======================================================================XX============================================================================================"
      
-     cat valid_wb.txt| grep ".xls\|.xlsx\|.sql\|.csv\|.env\|.msql\|.bak\|.bkp\|.bkf\|.old\|.temp\|.db\|.mdb\|.config\|.yaml\|.zip\|.tar\|.git\|.xz\|.asmx\|.vcf\|.pem" | sort | uniq | tee wb_sensitive.txt | wc -l        
+     cat allurl.txt | grep ".xls\|.xlsx\|.sql\|.csv\|.env\|.msql\|.bak\|.bkp\|.bkf\|.old\|.temp\|.db\|.mdb\|.config\|.yaml\|.zip\|.tar\|.git\|.xz\|.asmx\|.vcf\|.pem" | sort | uniq | tee wb_sensitive.txt | wc -l        
      echo -e "${YELLOW}WB Sensitive files saved wb_sensitive.txt" ; wc -l wb_sensitive.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
      
 #other
     
-     cat valid_wb.txt | grep -i "jira\|jenkins\|grafana\|mailman\|+CSCOE+\|+CSCOT+\|+CSCOCA+\|symfony\|graphql\|debug\|gitlab\|phpmyadmin\|phpMyAdmin" | sort| uniq | tee wb-third-party-assets.txt| wc -l 
+     cat allurl.txt | grep -i "jira\|jenkins\|grafana\|mailman\|+CSCOE+\|+CSCOT+\|+CSCOCA+\|symfony\|graphql\|debug\|gitlab\|phpmyadmin\|phpMyAdmin" | sort| uniq | tee wb-third-party-assets.txt| wc -l 
      echo -e "${YELLOW}All wb-third-party-assets Files saved to wb-third-party-assets.txt" ; wc -l wb-third-party-assets.txt 
       echo -e "${RED}=======================================================================XX============================================================================================"
     
-     cat valid_wb.txt | grep "@" | sort | uniq | tee wb-emails-usersnames.txt | wc -l
+     cat allurl.txt  | grep "@" | sort | uniq | tee wb-emails-usersnames.txt | wc -l
      echo -e "${YELLOW}All wb-emails-usersnames Files saved to wb-emails-usersnames.txt" ; wc -l wb-emails-usersnames.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-     cat valid_wb.txt | grep "error." | sort | uniq | tee wb-error.txt | wc -l
+     cat allurl.txt  | grep "error." | sort | uniq | tee wb-error.txt | wc -l
      echo -e "${YELLOW}All wb-error Files saved to wb-error.txt" ; wc -l wb-error.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-     cat valid_wb.txt | grep -i "root\| internal\| private\|secret" | sort | uniq | tee other-possible-sensitive-path.txt | wc -l
+     cat allurl.txt  | grep -i "root\| internal\| private\|secret" | sort | uniq | tee other-possible-sensitive-path.txt | wc -l
      echo -e "${YELLOW}ALL other-possible-sensitive-path Files saved to other-possible-sensitive-path.txt" ; wc -l other-possible-sensitive-path.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-     cat valid_wb.txt | grep -i "login\|singup\|admin\|dashboard\|wp-admin\|singin\|adminer\|dana-na\|login/?next/=" | sort | uniq | tee wb-panel.txt | wc -l
+     cat allurl.txt  | grep -i "login\|singup\|admin\|dashboard\|wp-admin\|singin\|adminer\|dana-na\|login/?next/=" | sort | uniq | tee wb-panel.txt | wc -l
      echo -e "${YELLOW}All wb-panel Files saved to wb-panel.txt" ; wc -l wb-panel.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-     cat valid_wb.txt | grep -i robots.txt | sort | uniq | tee only-robots.txt | wc -l
+     cat allurl.txt  | grep -i robots.txt | sort | uniq | tee only-robots.txt | wc -l
      echo -e "${YELLOW}robots.txt Files saved to only-robots.txt" ; wc -l only-robots.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-     cat valid_wb.txt | cut -d'/' -f3 | cut -d':' -f1 | sed 's/^\(\|s\):\/\///g' | tee subdomains.txt | wc -l 
+     cat allurl.txt  | cut -d'/' -f3 | cut -d':' -f1 | sed 's/^\(\|s\):\/\///g' | tee subdomains.txt | wc -l 
      echo -e "${YELLOW}subdomains Files saved to subdomains.txt" ; wc -l subdomains.txt 
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-     cat valid_wb.txt | rev | cut -d '/' -f 1 | rev | sed 's/^\(\|s\):\/\///g' | sed '/=\|.js\|.gif\|.html\|.rss\|.cfm\|.htm\|.jpg\|.mp4\|.css\|.jpeg\|.png\|:\|%/d' | tee wordlist.txt | wc -l
+     cat allurl.txt  | rev | cut -d '/' -f 1 | rev | sed 's/^\(\|s\):\/\///g' | sed '/=\|.js\|.gif\|.html\|.rss\|.cfm\|.htm\|.jpg\|.mp4\|.css\|.jpeg\|.png\|:\|%/d' | tee wordlist.txt | wc -l
      echo -e "${YELLOW}wordlist Files saved to wordlist.txt" ; wc -l wordlist.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
      
-     cat validsub.txt | gauplus  -random-agent | grep  ".xlsx" | tee xlsx.txt
+     cat allurl.txt  | gauplus  -random-agent | grep  ".xlsx" | tee xlsx.txt
      echo -e "${YELLOW}All xlsx saved xlsx.txt" ; wc -l xlsx.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
     
-     cat valid_wb.txt | grep '.bak' | tee bak.txt 
+     cat allurl.txt  | grep '.bak' | tee bak.txt 
      echo -e "${YELLOW}bak File saved bak.txt" ; wc -l bak.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
      
-     cat valid_wb.txt | grep '.log' | tee log.txt 
+     cat allurl.txt | grep '.log' | tee log.txt 
      echo -e "${YELLOW} Log Files saved log.txt" ; wc -l log.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
     
@@ -303,7 +311,7 @@ grep -r -E "aws_access_key|aws_secret_key|api key|passwd|pwd|heroku|slack|fireba
      subzy run --targets allsub.txt --hide_fails     
      echo -e "${RED}=======================================================================XX============================================================================================"
 
-     cat valid_wb.txt | gf sqli| tee sql1.txt
+     cat allurl.txt  | gf sqli| tee sql1.txt
      echo -e "${YELLOW}All sql Saved to sql1.txt" ; wc -l sql1.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
      
@@ -329,7 +337,7 @@ grep -r -E "aws_access_key|aws_secret_key|api key|passwd|pwd|heroku|slack|fireba
      
      echo -e "${BLUE}Collecting SSRF Endpoints"
      echo -e "${RED}=======================================================================XX============================================================================================"
-     cat valid_wb.txt | gf ssrf | tee SSRF_endpoint.txt
+     cat allurl.txt  | gf ssrf | tee SSRF_endpoint.txt
      echo -e "${YELLOW}SSRF Result saved to SSRF_endpoint.txt" ; wc -l SSRF_endpoint.txt
      echo -e "${RED}=======================================================================XX============================================================================================"
      
